@@ -1,0 +1,85 @@
+[11:48, 17/12/2022] +234 706 388 1739: elect * from sales_data;
+
+select brandname,count(orderid) as No_of_Orders
+from sales_data group by brandname;
+
+select brandname,count(orderid) as No_of_Orders,
+(price * orderqty) as Revenue,
+(unitcost * orderqty) as Cost_Of_Prod,
+((price * orderqty)-(unitcost * orderqty)) as Profit
+from sales_data group by brandname;
+[11:49, 17/12/2022] +234 803 437 5851: Thank you
+[12:00, 17/12/2022] +234 706 388 1739: select * from sales_data;
+
+select brandname,count(orderid) as No_of_Orders
+from sales_data group by brandname;
+
+select brandname,count(orderid) as No_of_Orders,
+(price * orderqty) as Revenue,
+(unitcost * orderqty) as Cost_Of_Prod,
+((price * orderqty)-(unitcost * orderqty)) as Profit
+from sales_data group by brandname;
+
+
+select brandname,count(orderid) as No_of_Orders,
+round((price * orderqty),2) as Revenue,
+round((unitcost * orderqty),2) as Cost_Of_Prod,
+round(((price * orderqty)-(unitcost * orderqty)),2) as Profit
+from sales_data group by brandname;
+
+select brandname,count(orderid) as No_of_Orders,
+round((price * orderqty),2) as Revenue,
+round((unitcost * orderqty),2) as Cost_Of_Prod,
+round(((price * orderqty)-(unitcost * orderqty)),2) as Profit
+from sales_…
+[12:13, 17/12/2022] +234 706 388 1739: select brandname, state, orderqty,
+case
+when orderqty <= 10 then "0-10 Orders"
+when orderqty > 11 then "10+ Orders"
+Else "Others"
+end as Order_basket
+from sales_data;
+[12:46, 17/12/2022] +234 706 388 1739: /* Quick Exercise
+
+1.What is the most profitable state
+2.Which state has the highest numbers of Orderqty
+3.What is the unique number of state
+4.How much profit was made from Oyo and Lagos
+5.What is the most popular brand in Oyo.
+
+15 mins
+ */
+ 
+ 
+
+
+select * from sales_data;
+
+
+select state,count(orderid) as No_of_Orders,
+round((price * orderqty),2) as Revenue,
+round((unitcost * orderqty),2) as Cost_Of_Prod,
+round(((price * orderqty)-(unitcost * orderqty)),2) as Profit
+from sales_data group by state
+order by Profit desc;
+
+select state, sum(orderqty) as No_Of_Orders
+from sales_data group by state order by No_Of_Orders desc;
+
+select state, count(orderid) as No_Of_Orders
+from sales_data group by state order by No_Of_Orders desc;
+
+
+select count(distinct state) as No_of_state
+from sales_data;
+
+select state,
+round(((price * orderqty)-(unitcost * orderqty)),2) as Profit
+from sales_data where state in ("Oyo","Lagos") 
+group by state
+order by Profit desc;
+
+select brandname, count(orderid) as No_of_sales
+from sales_data
+where state = "Oyo" group by brandname 
+order by No_of_sales desc
